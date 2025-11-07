@@ -3,7 +3,10 @@ const products = require('../data/products');
 
 const getProducts = async (req, res, next) => {
     try {
-        res.json(products);
+        if (process.env.NODE_ENV === 'production') {
+            // Use mock products in production
+            res.json(products);
+        }
     } catch (error) {
         next(error);
     }
